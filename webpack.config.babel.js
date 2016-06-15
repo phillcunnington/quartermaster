@@ -9,6 +9,7 @@ dotenv.config();
 
 const PATHS = {
   app: path.join(__dirname, "app"),
+  data: path.join(__dirname, "data"),
   build: path.join(__dirname, "public")
 };
 
@@ -38,6 +39,11 @@ const config = {
         test: /\.(js|jsx)$/,
         loaders: ["babel?cacheDirectory"],
         include: PATHS.app
+      },
+      {
+        test: /\.json$/,
+        loaders: ["json"],
+        include: PATHS.data
       }
     ]
   },

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Backend from "./backend";
+import data from "../data/data.json";
 import numeral from "numeral";
 numeral.defaultFormat("$0,0.00");
 numeral.language('en-GB', {
@@ -34,10 +34,7 @@ class App extends React.Component {
   }
 }
 
-Backend.initialise()
-  .then((data) => {
-    ReactDOM.render(
-      <App data={data} />,
-      document.getElementById("app")
-    );
-  });
+ReactDOM.render(
+  <App data={data} />,
+  document.getElementById("app")
+);
