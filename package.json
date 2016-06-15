@@ -23,6 +23,7 @@
     "node": "6.2.1"
   },
   "dependencies": {
+    "axios": "0.12.0",
     "express": "4.13.4",
     "foreman": "1.4.1",
     "react": "15.1.0",
