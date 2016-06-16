@@ -24,9 +24,13 @@
   },
   "dependencies": {
     "express": "4.13.4",
+    "express-session": "1.13.0",
     "foreman": "1.4.1",
     "json-loader": "0.5.4",
+    "morgan": "1.7.0",
     "numeral": "1.5.3",
+    "passport": "0.3.2",
+    "passport-google-oauth20": "1.0.0",
     "react": "15.1.0",
     "react-dom": "15.1.0"
   },
