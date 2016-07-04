@@ -23,29 +23,19 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_REDIRECT_URI
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("profile: " + JSON.stringify(profile));
     User.findOne({ "google_id": profile.id })
       .select("_id google_id")
       .exec(function(err, user) {
-      if (err) {
-        console.log("got error!");
-      } else if (user) {
-        console.log("found user: " + JSON.stringify(user));
-      } else {
-        console.log("did not find user");
-      }
-      done(err, user);
-    })
+        done(err, user);
+      });
   }
 ));
 
 passport.serializeUser(function(user, done) {
-  console.log("serialize user: " + JSON.stringify(user));
   done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-  console.log("deserialize user: " + JSON.stringify(user));
   done(null, user);
 });
 
@@ -89,5 +79,24 @@ function authenticate(req, res, next) {
 
 // Route declaration
 app.use(authenticate, express.static("public"));
+
+const Balance = mongoose.model("balance", {
+  balance: Number
+});
+const router = express.Router();
+
+router.route("/balance")
+  .get((req, res) => {
+    Balance.findOne()
+      .select("balance")
+      .exec((err, balance) => {
+        if (balance) {
+          res.json(balance.balance);
+        }
+      });
+  });
+
+app.use("/api", router);
+
 
 app.listen(port);

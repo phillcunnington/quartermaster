@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import data from "../data/data.json";
+import axios from "axios";
 import numeral from "numeral";
 numeral.defaultFormat("$0,0.00");
 numeral.language('en-GB', {
@@ -34,7 +34,10 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App data={data} />,
-  document.getElementById("app")
-);
+axios.get("/api/balance")
+  .then((res) => {
+    ReactDOM.render(
+      <App data={{ "accounts": { "total": res.data } }} />,
+      document.getElementById("app")
+    );
+  });
